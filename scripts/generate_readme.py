@@ -31,24 +31,16 @@ def image_url(repository: str, branch: str, path: str) -> str:
 
 
 def render_gallery(paths: list[str], repository: str, branch: str) -> str:
-    if not paths:
-        return "Aucune image pour le moment. Ajoutez une image au dépôt pour la voir apparaître ici."
-
-    label = "image disponible" if len(paths) == 1 else "images disponibles"
-    rows = [f"**{len(paths)} {label}.**", ""]
+    rows = []
     for path in paths:
         name = html.escape(path)
         url = image_url(repository, branch, path)
         rows.extend([
-            f"<h3>{name}</h3>",
-            "",
             f'<a href="{url}"><img src="{url}" alt="{name}" width="140" align="left"></a>',
             "",
             "```text",
             url,
             "```",
-            "",
-            f'<a href="{url}">Ouvrir l’image en taille réelle ↗</a>',
             "",
             '<br clear="all">',
             "",

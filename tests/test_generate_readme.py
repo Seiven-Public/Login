@@ -93,6 +93,7 @@ class GalleryTests(unittest.TestCase):
         parsed = GalleryHTML(rendered)
         thumbnails = [attrs for tag, attrs in parsed.tags if tag == "img"]
         self.assertEqual(len(thumbnails), len(paths))
+        text_without_urls = "".join(parsed.text)
         links = {attrs.get("href") for tag, attrs in parsed.tags if tag == "a"}
         for path, thumbnail in zip(paths, thumbnails):
             url = catalogue.image_url("Seiven-Public/Login", "main", path)
@@ -101,6 +102,8 @@ class GalleryTests(unittest.TestCase):
             self.assertEqual(thumbnail.get("align"), "left")
             self.assertIn(url, links)
             self.assertIn(f"```text\n{url}\n```", rendered)
+            text_without_urls = text_without_urls.replace(url, "")
+        self.assertEqual(text_without_urls.replace("```text", "").replace("```", "").strip(), "")
 
     def test_filenames_cannot_inject_html(self):
         path = 'images/<script>alert("x")</script> & logo.png'
@@ -109,11 +112,11 @@ class GalleryTests(unittest.TestCase):
         self.assertFalse(any(tag == "script" for tag, _ in parsed.tags))
         self.assertIn("&lt;script&gt;", rendered)
         self.assertIn("&amp;", rendered)
-        self.assertIn(path, "".join(parsed.text))
+        self.assertIn(path, [attrs.get("alt") for tag, attrs in parsed.tags if tag == "img"])
 
     def test_empty_gallery_does_not_render_broken_thumbnails(self):
         rendered = catalogue.render_gallery([], "Seiven-Public/Login", "main")
-        self.assertIsInstance(rendered, str)
+        self.assertEqual(rendered, "")
         self.assertFalse(any(tag == "img" for tag, _ in GalleryHTML(rendered).tags))
 
 
