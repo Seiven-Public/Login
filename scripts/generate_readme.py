@@ -35,26 +35,25 @@ def render_gallery(paths: list[str], repository: str, branch: str) -> str:
         return "Aucune image pour le moment. Ajoutez une image au dépôt pour la voir apparaître ici."
 
     label = "image disponible" if len(paths) == 1 else "images disponibles"
-    rows = [f"**{len(paths)} {label}.**", "", "<table>", "<thead><tr><th>Aperçu</th><th>Fichier et URL à copier</th></tr></thead>", "<tbody>"]
+    rows = [f"**{len(paths)} {label}.**", ""]
     for path in paths:
         name = html.escape(path)
         url = image_url(repository, branch, path)
         rows.extend([
-            "<tr>",
-            f'<td align="center"><a href="{url}"><img src="{url}" alt="{name}" width="140"></a></td>',
-            "<td>",
-            f"<strong>{name}</strong>",
+            f"<h3>{name}</h3>",
+            "",
+            f'<a href="{url}"><img src="{url}" alt="{name}" width="140" align="left"></a>',
             "",
             "```text",
             url,
             "```",
             "",
             f'<a href="{url}">Ouvrir l’image en taille réelle ↗</a>',
-            "</td>",
-            "</tr>",
+            "",
+            '<br clear="all">',
+            "",
         ])
-    rows.extend(["</tbody>", "</table>"])
-    return "\n".join(rows)
+    return "\n".join(rows).rstrip()
 
 
 def update_readme(content: str, gallery: str) -> str:

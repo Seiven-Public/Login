@@ -35,18 +35,27 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: main
-      - name: Générer le catalogue
+      - name: Générer et enregistrer le catalogue
         env:
           REPOSITORY: ${{ github.repository }}
-        run: python3 scripts/generate_readme.py --repository "$REPOSITORY"
-      - name: Enregistrer les changements
         run: |
-          git add -- README.md
-          if git diff --cached --quiet; then
-            echo "Le catalogue est déjà à jour."
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "docs: actualiser le catalogue des images"
-          git push origin HEAD:main
+          # Un ajout d’image concurrent peut avancer main pendant la génération.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python3 scripts/generate_readme.py --repository "$REPOSITORY"
+            git add -- README.md
+            if git diff --cached --quiet; then
+              echo "Le catalogue est déjà à jour."
+              exit 0
+            fi
+            git commit -m "docs: actualiser le catalogue des images"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Nouvelle tentative ($attempt/3) depuis la dernière version de main."
+          done
+          echo "Impossible de publier le catalogue après trois tentatives."
+          exit 1

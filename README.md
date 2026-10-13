@@ -14,59 +14,53 @@ Retrouvez les visuels du dépôt, prévisualisez-les et récupérez leur URL dir
 
 **4 images disponibles.**
 
-<table>
-<thead><tr><th>Aperçu</th><th>Fichier et URL à copier</th></tr></thead>
-<tbody>
-<tr>
-<td align="center"><a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/cellule-config-dessin.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/cellule-config-dessin.webp" alt="cellule-config-dessin.webp" width="140"></a></td>
-<td>
-<strong>cellule-config-dessin.webp</strong>
+<h3>cellule-config-dessin.webp</h3>
+
+<a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/cellule-config-dessin.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/cellule-config-dessin.webp" alt="cellule-config-dessin.webp" width="140" align="left"></a>
 
 ```text
 https://raw.githubusercontent.com/Seiven-Public/Login/main/cellule-config-dessin.webp
 ```
 
 <a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/cellule-config-dessin.webp">Ouvrir l’image en taille réelle ↗</a>
-</td>
-</tr>
-<tr>
-<td align="center"><a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-gpg-carre.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-gpg-carre.webp" alt="logo-gpg-carre.webp" width="140"></a></td>
-<td>
-<strong>logo-gpg-carre.webp</strong>
+
+<br clear="all">
+
+<h3>logo-gpg-carre.webp</h3>
+
+<a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-gpg-carre.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-gpg-carre.webp" alt="logo-gpg-carre.webp" width="140" align="left"></a>
 
 ```text
 https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-gpg-carre.webp
 ```
 
 <a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-gpg-carre.webp">Ouvrir l’image en taille réelle ↗</a>
-</td>
-</tr>
-<tr>
-<td align="center"><a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-isofroid-carre.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-isofroid-carre.webp" alt="logo-isofroid-carre.webp" width="140"></a></td>
-<td>
-<strong>logo-isofroid-carre.webp</strong>
+
+<br clear="all">
+
+<h3>logo-isofroid-carre.webp</h3>
+
+<a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-isofroid-carre.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-isofroid-carre.webp" alt="logo-isofroid-carre.webp" width="140" align="left"></a>
 
 ```text
 https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-isofroid-carre.webp
 ```
 
 <a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-isofroid-carre.webp">Ouvrir l’image en taille réelle ↗</a>
-</td>
-</tr>
-<tr>
-<td align="center"><a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-seiven-carre.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-seiven-carre.webp" alt="logo-seiven-carre.webp" width="140"></a></td>
-<td>
-<strong>logo-seiven-carre.webp</strong>
+
+<br clear="all">
+
+<h3>logo-seiven-carre.webp</h3>
+
+<a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-seiven-carre.webp"><img src="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-seiven-carre.webp" alt="logo-seiven-carre.webp" width="140" align="left"></a>
 
 ```text
 https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-seiven-carre.webp
 ```
 
 <a href="https://raw.githubusercontent.com/Seiven-Public/Login/main/logo-seiven-carre.webp">Ouvrir l’image en taille réelle ↗</a>
-</td>
-</tr>
-</tbody>
-</table>
+
+<br clear="all">
 
 <!-- END IMAGE CATALOG -->
 

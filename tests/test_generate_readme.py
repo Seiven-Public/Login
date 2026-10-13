@@ -91,7 +91,6 @@ class GalleryTests(unittest.TestCase):
         paths = ["logos/été #1? | image.PNG", "banners/hero.webp"]
         rendered = catalogue.render_gallery(paths, "Seiven-Public/Login", "main")
         parsed = GalleryHTML(rendered)
-        self.assertTrue(any(tag == "table" for tag, _ in parsed.tags))
         thumbnails = [attrs for tag, attrs in parsed.tags if tag == "img"]
         self.assertEqual(len(thumbnails), len(paths))
         links = {attrs.get("href") for tag, attrs in parsed.tags if tag == "a"}
@@ -99,6 +98,7 @@ class GalleryTests(unittest.TestCase):
             url = catalogue.image_url("Seiven-Public/Login", "main", path)
             self.assertEqual(thumbnail.get("src"), url)
             self.assertEqual(thumbnail.get("width"), "140")
+            self.assertEqual(thumbnail.get("align"), "left")
             self.assertIn(url, links)
             self.assertIn(f"```text\n{url}\n```", rendered)
 
