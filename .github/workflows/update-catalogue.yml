@@ -1,0 +1,61 @@
+name: Mettre à jour le catalogue
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Vérifier le générateur
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -v
+      - run: python3 scripts/generate_readme.py
+
+  update:
+    name: Actualiser le README
+    needs: validate
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: image-catalogue-main
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+      - name: Générer et enregistrer le catalogue
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Un ajout d’image concurrent peut avancer main pendant la génération.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python3 scripts/generate_readme.py --repository "$REPOSITORY"
+            git add -- README.md
+            if git diff --cached --quiet; then
+              echo "Le catalogue est déjà à jour."
+              exit 0
+            fi
+            git commit -m "docs: actualiser le catalogue des images"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Nouvelle tentative ($attempt/3) depuis la dernière version de main."
+          done
+          echo "Impossible de publier le catalogue après trois tentatives."
+          exit 1
